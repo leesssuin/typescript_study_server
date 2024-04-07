@@ -1,13 +1,13 @@
 require("dotenv").config();
-let createError = require("http-errors");
-let express = require("express");
-let path = require("path");
-let cookieParser = require("cookie-parser");
-let logger = require("morgan");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 
-let indexRouter = require("./routes/index");
+const indexRouter = require("./routes/index");
 
-let app = express();
+const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -30,7 +30,6 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
 });
 
 module.exports = app;
