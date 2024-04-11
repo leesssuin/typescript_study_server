@@ -5,3 +5,9 @@ exports.getList = async () => {
 
   return list;
 };
+
+exports.getInfo = async (id) => {
+  const info = await StoreList.findById(id).populate("menu");
+
+  return info;
+};

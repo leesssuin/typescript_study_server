@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Category = require("./category");
+const Menu = require("./menu");
 
 const Schema = mongoose.Schema;
 
@@ -20,10 +20,10 @@ const StoreSchema = new Schema({
     type: Number,
     required: true
   },
-  order_options: [
+  menu: [
     {
       type: Schema.Types.ObjectId,
-      ref: Category
+      ref: Menu
     }
   ]
 });
