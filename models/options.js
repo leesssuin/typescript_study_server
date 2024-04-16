@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const OptionsSchema = new Schema({
   id: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true
   },
   name: {
