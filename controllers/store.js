@@ -18,9 +18,9 @@ exports.getStoreList = async (req, res, next) => {
 };
 
 exports.getStoreInfo = async (req, res, next) => {
-  try {
-    const { id } = req.params;
+  const { id } = req.params;
 
+  try {
     if (!ObjectId.isValid(id)) {
       res.status(400).json({
         result: "error400",
@@ -37,6 +37,32 @@ exports.getStoreInfo = async (req, res, next) => {
     res.json({
       result: "success",
       store_info: info
+    });
+  } catch (err) {
+    next(createError(500, "Invalid Error"));
+  }
+};
+
+exports.getOptions = async (req, res, next) => {
+  const { menuId } = req.params;
+
+  try {
+    if (!ObjectId.isValid(menuId)) {
+      res.status(400).json({
+        result: "error400",
+        error: {
+          message: "잘못된 주소입니다."
+        }
+      });
+
+      return;
+    }
+
+    const menuInfo = await storeService.getMenuOptions(menuId);
+
+    res.json({
+      result: "success",
+      menu_options: menuInfo
     });
   } catch (err) {
     next(createError(500, "Invalid Error"));
