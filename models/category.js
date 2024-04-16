@@ -12,12 +12,10 @@ const categorySchema = new Schema({
     type: Number,
     required: true
   },
-  options: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: Options
-    }
-  ]
+  options: {
+    type: Array,
+    required: true
+  }
 });
 
 module.exports = mongoose.model("Category", categorySchema, "category");
