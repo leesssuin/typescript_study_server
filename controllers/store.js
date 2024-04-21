@@ -2,6 +2,7 @@ const createError = require("http-errors");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
 
+const { RESULT_MESSAGE, ERROR_MESSAGE } = require("../const/response");
 const storeService = require("../services/store");
 
 exports.getStoreList = async (req, res, next) => {
@@ -9,11 +10,11 @@ exports.getStoreList = async (req, res, next) => {
     const storeList = await storeService.getList();
 
     res.json({
-      result: "success",
+      result: RESULT_MESSAGE.SUCCESS,
       store_list: storeList
     });
   } catch (err) {
-    next(createError(500, "Invalid Error"));
+    next(createError(500, ERROR_MESSAGE.INVALID_SERVER_ERROR));
   }
 };
 
@@ -23,9 +24,9 @@ exports.getStoreInfo = async (req, res, next) => {
   try {
     if (!ObjectId.isValid(id)) {
       res.status(400).json({
-        result: "error400",
+        result: RESULT_MESSAGE.FAIL,
         error: {
-          message: "잘못된 ID 입니다."
+          message: ERROR_MESSAGE.VALIDATION_ERROR
         }
       });
 
@@ -35,11 +36,11 @@ exports.getStoreInfo = async (req, res, next) => {
     const info = await storeService.getInfo(id);
 
     res.json({
-      result: "success",
+      result: RESULT_MESSAGE.SUCCESS,
       store_info: info
     });
   } catch (err) {
-    next(createError(500, "Invalid Error"));
+    next(createError(500, ERROR_MESSAGE.INVALID_SERVER_ERROR));
   }
 };
 
@@ -49,9 +50,9 @@ exports.getOptions = async (req, res, next) => {
   try {
     if (!ObjectId.isValid(menuId)) {
       res.status(400).json({
-        result: "error400",
+        result: RESULT_MESSAGE.FAIL,
         error: {
-          message: "잘못된 주소입니다."
+          message: ERROR_MESSAGE.VALIDATION_ERROR
         }
       });
 
@@ -61,10 +62,10 @@ exports.getOptions = async (req, res, next) => {
     const menuInfo = await storeService.getMenuOptions(menuId);
 
     res.json({
-      result: "success",
+      result: RESULT_MESSAGE.SUCCESS,
       menu_options: menuInfo
     });
   } catch (err) {
-    next(createError(500, "Invalid Error"));
+    next(createError(500, ERROR_MESSAGE.INVALID_SERVER_ERROR));
   }
 };
