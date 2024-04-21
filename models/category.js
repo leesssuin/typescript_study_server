@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Options = require("./options");
 
 const Schema = mongoose.Schema;
 
